@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'FruitCoffee.wsgi.application'
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }"""
-import dj_database_url
+"""import dj_database_url
 from decouple import config
 DATABASES={
     'default':dj_database_url.config(
@@ -100,13 +100,13 @@ DATABASES={
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'd6ma6lmdr5supn',
-            'USER': 'mvlhyfbvdrmdto',
-            'PASSWORD': '5fdee713d9a673f00578b6a7f22e45c00996048a83544a98ae94046ecde5ccbb',
-            'HOST': 'ec2-44-194-117-205.compute-1.amazonaws.com',
+            'NAME': 'der8p2vphdau6d',
+            'USER': 'kgoshqlrtseiiw',
+            'PASSWORD': '0e7b0882e82de2bf225d2dc96cfc04187b0b319c2f593fb56e94e6a581014d32',
+            'HOST': 'ec2-3-234-131-8.compute-1.amazonaws.com',
             'PORT': '5432',
         }
-    }"""
+    }
 
 
 # Password validation
