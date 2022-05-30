@@ -19,7 +19,7 @@ def index(request):
     except:
         correo='null'
         rol='null'
-    resp=Servi.listar_productos()
+    resp={}#Servi.listar_productos()
     datos={'correo':correo,'productos':resp,'rol':rol,'carrito':carrito}
     #print(resp)
     return render(request,'paginas/index.html',datos)
