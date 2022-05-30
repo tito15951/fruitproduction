@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{%block titulo%}Iniciar sesión{%endblock%}
+{% block contenido%}
+
+
+<div class="imagen-fondo">
+    <div class="offset-md-4 col-md-4">
+        <div class="card">
+            <div class="card-body">
+                {%for mensaje in messages%}
+            <div class="alert alert-danger text-center" role="alert">
+                {{mensaje}}
+              </div>
+              {% endfor %}
+                <h3 class="card-title text-center titulo">Iniciar sesion</h3>
+                <br>
+                <form enctype="multipart/form-data" method="post" action="iniciarSesion">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="offset-md-2 col-md-8">
+                            <input type="email" id="email" name="email" class="form-control inputs" placeholder="Correo electronico" />
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="offset-md-2 col-md-8">
+                            <input type="password" id="contrasenia" name="contrasenia" class="form-control inputs" placeholder="Contraseña" />
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="offset-md-4 col-md-4">
+                            <button type="submit" class="btn btn-primary botones">Ingresar</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="offset-md-2 col-md-8">
+                            <a class="vinculos" href="{% url 'contra1' %}">No recuerdo mi contraseña</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
