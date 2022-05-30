@@ -1,0 +1,136 @@
+{% extends 'base.html' %} {%block titulo%}Buscador{%endblock%} {% block contenido%}
+<div class="row">
+    <div class="col-md-3 staticDiv">
+        <div class="card card-filtros">
+            <div class="row" style="margin-top: 5%;margin-bottom: 5%;">
+                <div class="col-md-8 mx-auto">
+                    <form method="post" action="buscarProductos" enctype="multipart/form-data">
+                        {%csrf_token%}
+
+                        <input type="text" id="nombre" name="nombre" class="form-control inputs-buscador" autocomplete="off" placeholder="Nombre" />
+                        <br>
+                        <h5 class="text-center" style="color:white">Sabor</h5>
+                        {%for key, sabor in sabores.items %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{sabor}}" id="{{sabor}}" name="{{sabor}}">
+                            <label class="form-check-label" for="flexCheckChecked" style="color:white;">
+                            {{sabor}}
+                            </label>
+                        </div>
+                        {%endfor%}
+                        <br>
+                        <label for="customRange3" class="form-label" name="lblValoracion" id="lblValoracion" style="color:white; font-size:20px;">Puntaje: 50</label>
+                        <input type="range" name="valoracion" class="form-range barra" onchange="cambiarInput()" min="0" max="100" step="2" id="valoracion">
+                        <button type="submit" class="btn btn-primary botones col-md-12 mx-auto" style="margin-top: 5%; border-radius: 10px;">Filtrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offset-md-3 col-md-9">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-carousel">
+                    <div class="row" style="background-color: white; padding: 1%; border-radius: 20px;">
+                        <div class="col-md-6">
+                            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="https://cdn.pixabay.com/photo/2014/12/11/02/56/coffee-563797_960_720.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="https://cdn.pixabay.com/photo/2012/02/23/09/16/coffee-15994_960_720.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="https://cdn.pixabay.com/photo/2017/04/25/08/02/coffee-beans-2258839_960_720.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="https://cdn.pixabay.com/photo/2013/08/11/19/46/coffee-171653_960_720.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="https://cdn.pixabay.com/photo/2017/09/04/18/39/coffee-2714970_960_720.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="https://cdn.pixabay.com/photo/2015/05/07/13/46/cappuccino-756490_960_720.jpg" class="d-block w-100" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card col-md-12">
+                <div class="card-title titulo-tarjeta">
+                    <h3>Nuestros productos...</h3>
+                </div>
+                <div class="row">
+
+                    {%for producto in productos%}
+
+                    <div class="col-md-4">
+                        <div class="card card-productos">
+                            <div class="card-title text-center" style="font-size: 20px;">{{producto.nombre}}</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="imagenes/{{ producto.imagen }}" height="100px" width="110px">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <h5 class="col-md-12 mx-auto text-center">${{producto.valor}}</h5>
+                                        </div>
+                                        <div class="row">
+                                            <form enctype="multipart/form-data" method="post" action="verProducto">
+                                                {% csrf_token %}
+                                                <input style="display:none" id="id" name="id" value="{{producto.id}}"></input>
+                                                <button type="submit" class="btn btn-primary botones mx-auto" style="margin-top: 5%; border-radius: 10px;">Detalles</button>
+                                            </form>
+                                        </div>
+                                        <div class="row">
+                                            <button type="button" class="btn btn-primary botones col-md-12 mx-auto" style="margin-top: 5%; border-radius: 10px;">Comprar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function cambiarInput() {
+        var valoracion = $("#valoracion").val();
+        console.log(valoracion)
+        document.querySelector('#lblValoracion').innerHTML = 'Puntaje: ' + valoracion;
+    }
+</script>
+<style>
+    .card-carousel {
+        margin-top: 2% !important;
+        margin-bottom: 2% !important;
+    }
+    
+    .barra {
+        color: white !important;
+    }
+    
+    .staticDiv {
+        position: fixed;
+        top: 10%;
+        left: 2%;
+        width: 320px;
+        height: 100px;
+    }
+</style>
+{%endblock%}

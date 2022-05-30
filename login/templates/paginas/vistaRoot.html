@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{%block titulo%}Panel de administración{%endblock%}
+{% block contenido%}
+<div class="card card-internos" style="background-color: rgb(156, 95, 57) !important;">
+    <div class="card-title">
+    <h3 class="text-center" style="color: white;">
+        Perfil de administrador
+    </h3>
+      </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-internos">
+                <div class="card-title">
+                    <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Rol</th>
+                            <th scope="col">Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {%for vendedor in vendedores%}
+                          <tr>
+                            <td>{{vendedor.correo}}</td>
+                            <td>{{vendedor.nombre}}</td>
+                            <td>Vendedor</td>
+                            <td>
+                                <form enctype="multipart/form-data" method="post" action="ascenderVendedor">
+                                    {% csrf_token %}
+                                    <input style="display:none" id="correo" name="correo" value="{{vendedor.correo}}"></input>
+                                    <button type="submit" class="btn btn-primary botones" style="margin-top: 5%; border-radius: 10px;">Promover</button>
+                            </form>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                          {%for usuario in usuarios%}
+                          <tr>
+                            <td>{{usuario.correo}}</td>
+                            <td>{{usuario.nombre}}</td>
+                            <td>Usuario</td>
+                            <td>
+                                <form enctype="multipart/form-data" method="post" action="ascenderCliente">
+                                        {% csrf_token %}
+                                        <input style="display:none" id="correo" name="correo" value="{{usuario.correo}}"></input>
+                                        <button type="submit" class="btn btn-primary botones" style="margin-top: 5%; border-radius: 10px;">Promover</button>
+                                </form>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                          {%for catador in catadores%}
+                          <tr>
+                            <td>{{catador.correo}}</td>
+                            <td>{{catador.nombre}}</td>
+                            <td>Catador</td>
+                            <td>
+                                <form enctype="multipart/form-data" method="post" action="desascenderCatador">
+                                    {% csrf_token %}
+                                    <input style="display:none" id="correo" name="correo" value="{{catador.correo}}"></input>
+                                    <button type="submit" class="btn btn-primary botones" style="margin-top: 5%; border-radius: 10px;">Desascender</button>
+                            </form>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                      
+                      
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-internos">
+                <div class="card-title">
+                    <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Dueño</th>
+                            <th scope="col">Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {%for producto in productos%}
+                          <tr>
+                            <td>{{producto.id}}</td>
+                            <td>{{producto.nombre}}</td>
+                            <td>{{producto.duenio_id}}</td>
+                            <td>
+                                <form enctype="multipart/form-data" method="post" action="eliminarProductoAdmin">
+                                    {% csrf_token %}
+                                    <input style="display:none" id="id" name="id" value="{{producto.id}}"></input>
+                                    <button type="submit" class="btn btn-primary botones" style="margin-top: 5%; border-radius: 10px;">Eliminar</button>
+                            </form>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+{%endblock%}
+

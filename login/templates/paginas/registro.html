@@ -1,0 +1,71 @@
+{% extends 'base.html' %} {%block titulo%}Registro{%endblock%} {% block contenido%}
+
+<div class="row" style="margin-top:5%;">
+    <div class="col-md-4">
+        <div class="card" style="margin-top: 5%;">
+            {%for mensaje in messages%}
+            <div class="alert alert-danger text-center" role="alert">
+                {{mensaje}}
+              </div>
+              {% endfor %}
+            <h3 class="card-title text-center" style="color: white; margin-top: 10%;">Registro</h3>
+            <br>
+            <form enctype="multipart/form-data" method="post" action="registrarUsuario">
+                {% csrf_token%}
+                <div class="row">
+                    <div class="offset-md-2 col-md-8">
+                        <input type="text" id="nombre" name="nombre" class="form-control inputs" autocomplete="off" placeholder="Ingrese su nombre" />
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="offset-md-2 col-md-8">
+                        <input type="email" id="email" name="email" class="form-control inputs" placeholder="Correo electronico" />
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="offset-md-2 col-md-8">
+                        <input type="email" id="reemail" name="reemail" class="form-control inputs" placeholder="Repita el correo" />
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="offset-md-2 col-md-8">
+                        <input type="password" id="contrasenia" name="contrasenia" class="form-control inputs" placeholder="Contraseña" />
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="offset-md-2 col-md-8">
+                        <input type="password" id="recontrasenia" name="recontrasenia" class="form-control inputs" placeholder="Repita la contraseña" />
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="offset-md-4 col-md-4">
+                        <button type="submit" class="btn btn-primary botones" style="margin-bottom: 30%;">Registrarme</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+
+        <div class="row">
+            <img height="300px" width="200px" src="https://cdn.pixabay.com/photo/2016/03/26/13/09/cup-of-coffee-1280537_960_720.jpg">
+        </div>
+        <div class="row">
+            <div class="card">
+                <h3 class="card-title text-center" style="color: white; font-size: 40px;">¿Quiénes somos?</h3>
+                <div class="card-content text-center" style="font-size: 30px; color: white;">
+                    Somos una pagina web que se especializa en el perfilamiento y venta de café en grano y molido
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{%endblock%}

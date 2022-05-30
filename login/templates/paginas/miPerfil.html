@@ -1,0 +1,114 @@
+{%extends 'base.html'%} {%block titulo%}Mi perfil{%endblock%} {%block contenido%}
+<div class="card">
+    <div class="card-title">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="titulo-tarjeta2 text-center">Mi perfil</h4>
+            </div>
+            <div class="col-md-6 mx-auto">
+                <button type="submit" class="btn btn-primary botones" style="margin-top: 5%;" disabled><strong>Historial de compras</strong></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-internos">
+                    <div class="card-title text-center titulo-pequeno">
+                        Información personal
+                    </div>
+                    <br>
+                    <div class="form">
+                        <div class="row">
+                            <div class="offset-md-3 col-md-6">
+                                <input type="email" id="email" name="email" value="{{usuario.correo}}" class="form-control inputs" placeholder="Correo electronico" />
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="offset-md-3 col-md-6">
+                                <input type="text" id="nombre" name="nombre" value="{{usuario.nombre}}" class="form-control inputs" placeholder="Nombre" />
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="offset-md-3 col-md-6">
+                                <input type="text" id="dir" name="dir" class="form-control inputs" placeholder="Dirección" />
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="offset-md-3 col-md-6">
+                                <input type="text" id="rol" name="rol" value="{{usuario.rol}}" class="form-control inputs" placeholder="Rol" />
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="offset-md-5 col-md-4">
+                                <button type="submit" class="btn btn-primary botones" style="margin-bottom: 10%;">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="card card-internos">
+                    <div class="card-title text-center titulo-pequeno">Metodós de pago</div>
+                    {%if tarjetas%}
+                        {%for tarjeta in tarjetas%}
+                        <div class="row">
+                            <div class="offset-md-1 col-md-10">
+                                <div class="card card-pago text-center">
+                                    {{tarjeta.num_tarjeta}} - Saldo: ${{tarjeta.saldo}}
+                                </div>
+                            </div>
+                        </div>
+                        {%endfor%}
+                    {%else%}
+                    <div class="row">
+                        <div class="offset-md-1 col-md-10">
+                            <div class="card card-pago text-center">
+                                No tiene tarjetas disponibles
+                            </div>
+                        </div>
+                    </div>
+                    {%endif%}
+                    
+                    <br>
+                    <div class="row">
+                        <div class="offset-md-4 col-md-4">
+                            <a href="{% url 'nuevoMetodo' %}" class="btn btn-primary botones" style="margin-bottom: 10%;">Agregar metodo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .card-pago {
+        margin-bottom: 2%;
+    }
+    
+    .card {
+        margin-top: 5% !important;
+    }
+
+    
+    .botones {
+        top: 10% !important;
+    }
+    
+    .titulo-pequeno {
+        color: black;
+        font-size: 20px !important;
+    }
+    
+    .card-pago {
+        background-color: rgb(74, 31, 19) !important;
+        top: 5% !important;
+        bottom: 20% !important;
+        color: white
+    }
+</style>
+{%endblock%}

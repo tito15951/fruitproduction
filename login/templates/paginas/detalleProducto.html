@@ -1,0 +1,154 @@
+{%extends 'base.html'%} {%block titulo%} Detalle del producto{%endblock%} {%block contenido%}
+
+<div class="card">
+    <div class="card-title">
+        <h3 class="text-center" style="color:white !important;">{{producto.nombre}}</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-internos text-center" style="margin-top: 1% !important;margin-left: 5% !important;">
+                <img src="imagenes/{{ producto.imagen }}" height="300px" width="340px" style="padding:5%">
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-internos text-center" style="font-size: 30px;">{{producto.descripcion}}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-internos text-center">
+                        <div class="row" style="margin-top: 5%">
+                            <div class="col-md-10 mx-auto">
+                                <div class="card card-informacion" style="padding: 3%;">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Tueste: <strong>{{producto.tueste}}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-10 mx-auto">
+                                <div class="card card-informacion" style="padding: 3%;">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Beneficio: <strong>{{producto.beneficio}}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-10 mx-auto">
+                                <div class="card card-informacion" style="padding: 3%;">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Variedad: <strong>{{producto.variedad}}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-10 mx-auto" style="margin-bottom: 5%;">
+                                <div class="card card-informacion" style="padding: 3%;">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Puntuación: <strong>{{producto.valoracion}}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-internos text-center" style="font-size: 20px;">{{producto.presentacion}}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card card-internos text-center" style="font-size: 20px;">Sabor a {{producto.sabor}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="card card-internos">
+            <div class="row">
+                <div class="col-md-3 mx-auto">
+                    <input type="number" id="cantidad" name="cantidad" class="form-control inputs text-center" style="margin-top:5%;" value="1" placeholder="Cantidad" />
+                </div>
+                <div class="col-md-3 mx-auto">
+                    <button class="btn btn-primary botones">${{producto.valor}}</button>
+                </div>
+                {% if rol == "null" %}
+                <div class="col-md-3 mx-auto">
+                    <a href="{% url 'registro' %}" class="btn btn-primary botones">Registrate para comprar</a>
+                </div>
+                {% else %}
+                <div class="col-md-3 mx-auto">
+                    <form enctype="multipart/form-data" method="post" action="Add">
+                        {% csrf_token %}
+                        <input style="display:none" id="id" name="id" value="{{producto.id}}"></input>
+                        <button type="submit" class="btn btn-primary botones mx-auto" style="margin-top: 5%; border-radius: 10px;">Agregar al carrito</button>
+                    </form>
+                </div>
+                <div class="col-md-3 mx-auto">           
+                    <button type="button" class="btn btn-primary botones">Comprar</button>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+</div>
+
+<style>
+    .card-informacion {
+        background-color: rgb(74, 31, 19) !important;
+        color: white;
+    }
+    
+    .botonesCompra {
+        background-color: rgb(212, 203, 194) !important;
+        border-color: black !important;
+        border-radius: 10px;
+        color: black;
+    }
+    
+    .cantidad {
+        position: relative;
+        left: 15%;
+    }
+    
+    .card {
+        margin-top: 1% !important;
+    }
+    
+    .botones {
+        margin: 5% !important;
+    }
+    
+    .card-cantidad {
+        background-color: rgb(74, 31, 19) !important;
+    }
+    
+    .texto {
+        color: white;
+    }
+</style>
+
+
+{%endblock%}

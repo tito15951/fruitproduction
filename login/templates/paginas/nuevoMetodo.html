@@ -1,0 +1,77 @@
+{%extends 'base.html'%}{%block titulo%} Editar producto {%endblock%} 
+{%block contenido%}
+<div class="card col-md-8 mx-auto">
+    <div class="card-title">
+        <div class="col-md-8 mx-auto"><h4 class="titulo-tarjeta2 text-center">Nuevo metodo de pago</h4></div>
+    </div>
+    <div class="row">
+        {%for mensaje in messages%}
+            <div class="alert alert-danger text-center col-md-6 mx-auto" role="alert" style="padding: 2% !important; ">
+                {{mensaje}}
+            </div>
+        {% endfor %}
+    </div>
+    
+    <form enctype="multipart/form-data" method="post" action="crearTarjeta">
+        {% csrf_token %}
+        
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <input type="text" id="num_tarjeta" name="num_tarjeta" autocomplete="off" class="form-control inputs inputs-guardar" placeholder="Numero de tarjeta" />
+            </div>
+            <div class="col-md-4 mx-auto">
+                <input type="number" id="codigo" name="codigo" autocomplete="off" class="form-control inputs inputs-guardar" placeholder="Código de seguridad" />
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <input type="text" id="nom_titular" name="nom_titular" autocomplete="off" class="form-control inputs inputs-guardar" placeholder="Nombre del titular" />
+            </div>
+            <div class="col-md-4 mx-auto">
+                <div class="row">
+                    <select class="form-select select col-md-1" id="anio" name="anio" aria-label="Default select example">
+                        <option value="null" select>Año de vencimiento</option>
+                        {%for anio in anios%}
+                            <option value="{{anio}}">{{anio}}</option>
+                        {%endfor%}
+                    </select>
+                    <select class="form-select select col-md-1" id="mes" name="mes" aria-label="Default select example">
+                        <option value="null" selected>Mes de vencimiento</option>
+                        {%for mes in meses%}
+                            <option value="{{mes}}">{{mes}}</option>
+                        {%endfor%}
+                    </select>
+    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <input type="number" id="saldo" name="saldo" autocomplete="off" class="form-control inputs inputs-guardar" placeholder="Saldo" />
+            </div>
+        </div>
+        <div class="row">
+                <button type="submit" class="btn btn-primary botones col-md-4 mx-auto" style="margin-top: 5%; border-radius: 10px;">Guardar</button>
+        </div>
+    </form>
+</div>
+<style>
+.card {
+    margin-top: 1% !important;
+    padding: 1% !important;
+}
+.inputs-guardar {
+        margin-top: 8% !important;
+        color: white !important;
+    }
+.select {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    background-color: rgb(74, 31, 19) !important;
+    border-color: rgb(74, 31, 19) !important;
+    color: white !important;
+}
+    
+</style>
+{%endblock%}

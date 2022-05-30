@@ -1,0 +1,104 @@
+{%extends 'base.html'%} {%block titulo%} Detalle del producto{%endblock%} {%block contenido%}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-interno">
+            <div class="card-title titulo-tarjeta">
+                <div class="row">
+                    <div class="offset-md-1 col-md-3">
+                        <h3 style="margin-top: 3%;">Mis productos</h3>
+                    </div>
+                    <div class="offset-md-3 col-md-2">
+                        <button type="submit" class="btn btn-primary botones-link disabled"><strong>Estadisticas</strong></button>
+                    </div>
+
+                    <div class="col-md-2">
+                        <a class="btn btn-primary botones-link" href="{% url 'editarProducto'%}"><strong>Nuevo producto</strong></a>
+                    </div>
+                </div>
+                {%for mensaje in messages%}
+                <div class="alert alert-primary text-center" role="alert">
+                    {{mensaje}}
+                  </div>
+                {%endfor%}
+
+
+            </div>
+            <div class="row">
+
+            
+            {%for producto in productos%}
+            <div class="col-md-3">
+                <div class="card" style="margin: 2% !important; background-color:rgb(212, 203, 194) !important ">
+                    <div class="card-title text-center" style="font-size: 20px;">{{producto.nombre}}</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <img src="imagenes/{{ producto.imagen }}" height="110px" width="130px">
+                            </div>
+                            <div class="col-md-5 text-center">
+                                <h5>${{producto.valor}}</h5>
+
+                                <button type="submit" class="btn btn-primary botones" onclick="eliminarProducto('{{producto.id}}')" style="margin-top: 5%; border-radius: 10px;">Eliminar</button>
+                                
+                                
+                                <form enctype="multipart/form-data" method="post" action="editarProducto">
+                                    {% csrf_token %}
+                                    <input style="display:none" id="id" name="id" value="{{producto.id}}"></input>
+                                    <button type="submit" class="btn btn-primary botones mx-auto" style="margin-top: 5%; border-radius: 10px;">Editar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+        </div>
+    </div>
+    <script>
+        function eliminarProducto(id_producto){
+            Swal.fire({
+                title: 'Confirmación',
+                text: "¿Esta seguro de eliminar este producto?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!',
+                cancelButtonText:' Cancelar'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        method:'post',
+                        url:'/api/productos',
+                        data:{
+                            delete:'',
+                            id:id_producto
+                        }
+                    }).then((resp)=>{
+                        Swal.fire(
+                            'Eliminado!',
+                            'El producto fue eliminado correctamente',
+                            'success'
+                          ).then((res)=>{
+                              document.location.reload()
+                          })
+                    })
+                }
+              })
+        }
+    </script>
+    <style>
+        .card-interno {
+            margin-top: 3%;
+        }
+        
+        .botones-link {
+            background-color: rgb(212, 203, 194) !important;
+            color: black;
+            border-color: rgb(212, 203, 194) !important;
+            border-radius: 30px;
+            margin-top: 5%;
+        }
+    </style>
+    {%endblock%}
