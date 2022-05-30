@@ -26,7 +26,7 @@ SECRET_KEY = 'j@noyuc(omg&-olna6a5k1%u0)y=i(%4s^5sk0%yv6#08hl=4-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['fruitcoffee.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 #STATICFILES_DIRS=['C:/Users/Javier Martinez/Desktop/Emprendimiento/FruitCoffee/FruitCoffee/login/templates/static']
 #STATICFILES_DIRS=['C:/Users/KEVIN CARMONA/Desktop/FruitCoffee/FruitCoffee/login/templates/static']
