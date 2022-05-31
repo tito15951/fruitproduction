@@ -37,9 +37,9 @@ def peticionCrearTarjeta(request):
     except:
         errores+=1
         messages.error(request,'Porfavor ingrese un saldo valido')
-    print('Los datos son:',f"{numero_tarjeta} {cod_seguridad} {nombre} {anio} {mes} {saldo}")
+    #print('Los datos son:',f"{numero_tarjeta} {cod_seguridad} {nombre} {anio} {mes} {saldo}")
     if (errores==0):
-        print('Guardando')
+        #print('Guardando')
         resp=Servi.new_tarjeta_usuario(correo,numero_tarjeta,cod_seguridad,f"{anio}-{mes}-01",nombre,saldo)
         if(resp['Resp']):
             return redirect('perfil')

@@ -1,0 +1,78 @@
+<div class="modal fade" id="modelIdTarjeta" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: rgb(212, 203, 194) !important;">
+            <div class="modal-header">
+                <h5 class="modal-title">Seleccionar tarjeta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="card card-internos">
+                        <div class="card-title text-center titulo-pequeno">Metodós de pago</div>
+                        <div id="inyectable">
+
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="offset-md-4 col-md-4">
+                                <a href="{% url 'nuevoMetodo' %}" class="btn btn-primary botones" style="margin-bottom: 10%;">Agregar metodo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function cargarTarjetas(correo) {
+        console.log('Buscando tarjetas del cliente', '/api/metodopago?correo=', correo)
+        $.ajax({
+            method: 'get',
+            url: '/api/metodopago?correo=' + correo,
+        }).then((resp) => {
+            inyectable = ``
+            divInyectable = document.getElementById('inyectable')
+            console.log(resp)
+            console.log("Hay: ", resp.length, ' tarjetas')
+            if (resp.length == 0) {
+                inyectable = `<div class="row">
+                        <div class="offset-md-1 col-md-10">
+                            <div class="card card-pago text-center">
+                                No tiene tarjetas disponibles
+                            </div>
+                        </div>
+                    </div>`
+
+            } else {
+                resp.forEach(tarjeta => {
+                    inyectable += `<div class="row">
+                            <div class="offset-md-1 col-md-10">
+                                <div class="card card-pago text-center" style="padding: 5%">
+                                    ****${tarjeta.num_tarjeta.substring(12,16)} - Saldo: ${tarjeta.saldo}
+                                    
+                                    <form action='comprarCarrito' method='post' enctype="multipart/form-data">
+                                        {%csrf_token%}
+                                        <input id="tarjeta" name="tarjeta" style="display: none" value="${tarjeta.num_tarjeta}"/>
+                                        <button type="submit"  class="btn btn-primary botones">Seleccionar</button>
+                                        </form>
+
+                                </div>
+                            </div>
+                        </div>`
+                });
+            }
+            divInyectable.innerHTML = inyectable
+        })
+    }
+    cargarTarjetas("{{correo}}")
+</script>
+
+<style>
+    .card-pago {
+        margin-bottom: 2%;
+    }
+</style>

@@ -25,7 +25,7 @@ def index(request):
     return render(request,'paginas/index.html',datos)
 
 def cerrarSesion(request):
-    print('Eliminado sesion:',request.session['correo'])
+    #print('Eliminado sesion:',request.session['correo'])
     del request.session['correo']
     return HttpResponseRedirect('index')
     

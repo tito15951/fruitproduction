@@ -1,8 +1,8 @@
 import requests
 class Servicios:
     def __init__(self):
-        self.url_base='https://fruitcoffe-back.herokuapp.com/'
-        #self.url_base="http://127.0.0.1:8000/"
+        #self.url_base='https://fruitcoffe-back.herokuapp.com/'
+        self.url_base="http://127.0.0.1:8000/"
         self.dir_usuarios="api/usuarios"
         self.dir_prodictos="api/productos"
         self.dir_tarjetas="api/metodopago"
@@ -121,7 +121,7 @@ class Servicios:
 
     def crear_producto(self,duenio,nombre,descripcion,presentacion,sabor,cantidad,valor,foto,tueste,beneficio,variedad):
         url=self.url_base+self.dir_prodictos
-        print('Foto:',foto)
+        #print('Foto:',foto)
         datos={
             'create':'',
             'duenio': duenio,
@@ -185,19 +185,16 @@ class Servicios:
             resp=requests.post(url,datos)
             return resp.json()
         except:
-            print('Error interno')
             return {'Resp':False}
     
-    def new_pago(self,usuario,productos):
+    def new_pago(self,usuario,productos,tarjeta):
         url=self.url_base+self.dir_pagos
         datos={
             "nueva_compra":"",
             "usuario":usuario,
-            "productos":productos
+            "productos":productos,
+            "tarjeta":tarjeta,
         }
-        print(f"Enviando {datos}")
-        #print(f"Enviando: {usuario}({type(usuario)}) y {productos}({type(productos)})")
         resp=requests.post(url,datos)
         return resp.json()
-        return True
     

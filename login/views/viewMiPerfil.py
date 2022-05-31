@@ -3,7 +3,7 @@ from ..services import Servicios
 Servi=Servicios()
 
 def verMiPerfil(request):
-    print(f"El carrito tiene: {request.session['carrito']}")
+    #print(f"El carrito tiene: {request.session['carrito']}")
     correo=request.session["correo"]
     rol=request.session['rol']
     usuario=Servi.perfil(correo)

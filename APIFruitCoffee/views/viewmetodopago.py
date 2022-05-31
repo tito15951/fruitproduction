@@ -31,7 +31,7 @@ class Metodo_Pago(View):
                 ('nombre' in request.POST) and 
                 ('id_usuario'in request.POST) and
                 ('saldo' in request.POST)):
-                print('Creando tarjeta')
+                #print('Creando tarjeta')
                 num_tarjetaRequest=request.POST['num_tarjeta']
                 codigoRequest=request.POST['codigo']
                 FechaVenRequest=request.POST['fecha_venc']
@@ -39,7 +39,7 @@ class Metodo_Pago(View):
                 idRequest=request.POST['id_usuario']
                 saldoRequest=request.POST['saldo']
                 usuario=Usuario.objects.filter(correo=idRequest).first()
-                print(usuario)
+                #print(usuario)
                 cantidadTarjetas=MetodoPago.objects.filter(id_usuario=idRequest).count()
                 if cantidadTarjetas<=2:
                     MetodoPago.objects.create(num_tarjeta=num_tarjetaRequest,
@@ -47,7 +47,7 @@ class Metodo_Pago(View):
                                         fecha_venc=FechaVenRequest,
                                         nombre=nombreRequest,
                                         id_usuario=usuario)
-                    print('Tarjeta creada')
+                    #print('Tarjeta creada')
                     return JsonResponse({'Resp':True},safe=False,status=200)
                 else:
                     return JsonResponse({'Resp':False},safe=False,status=200)

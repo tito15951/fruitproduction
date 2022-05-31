@@ -14,8 +14,8 @@ def iniciarSesion(request):
             if respuestaJSON["Resp"]==True:
                 request.session['correo']=email
                 request.session['rol']=respuestaJSON['Rol']
-                print(request.session['correo'])
-                print(request.session['rol'])
+                #print(request.session['correo'])
+                #print(request.session['rol'])
                 if (respuestaJSON['Rol']=='admin'):
                     return redirect('administracion')
                 else:

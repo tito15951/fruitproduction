@@ -6,7 +6,7 @@ class Carrito:
     def __init__(self, request):
         self.request = request
         self.session = request.session
-        print (self.session)
+        #print (self.session)
         carrito =self.session.get('carrito')
         if not carrito:
             self.session["carrito"] = {}
@@ -16,8 +16,8 @@ class Carrito:
 
     def add_producto_carrito(self, producto):
         id = str(producto.id)
-        print(id)
-        print(self.carrito)
+        #print(id)
+        #print(self.carrito)
         if id not in self.carrito.keys():
             self.carrito[id]={
                 "producto_id": producto.id,
@@ -25,7 +25,7 @@ class Carrito:
                 "acumulado": producto.valor,
                 "cantidad": 1,
             }
-            print("lo repeti socio")
+            #print("lo repeti socio")
 
         else:
             for key,value in self.carrito.items():
@@ -48,7 +48,7 @@ class Carrito:
     def rest_producto_cant(self, producto):
         id = str(producto.id)
         if id in self.carrito:
-            print(id)
+            #print(id)
             self.carrito[id]["cantidad"] =  self.carrito[id]["cantidad"]-1
             self.carrito[id]["acumulado"] -= producto.valor
             if self.carrito[id]["cantidad"] < 1: 
