@@ -24,7 +24,7 @@ SECRET_KEY = 'j@noyuc(omg&-olna6a5k1%u0)y=i(%4s^5sk0%yv6#08hl=4-'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
