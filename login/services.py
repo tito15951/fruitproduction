@@ -1,8 +1,8 @@
 import requests
 class Servicios:
     def __init__(self):
-        #self.url_base='https://fruitcoffe-back.herokuapp.com/'
-        self.url_base="http://127.0.0.1:8000/"
+        self.url_base='https://fruitcoffe-back.herokuapp.com/'
+        #self.url_base="http://127.0.0.1:8000/"
         self.dir_usuarios="api/usuarios"
         self.dir_prodictos="api/productos"
         self.dir_tarjetas="api/metodopago"
