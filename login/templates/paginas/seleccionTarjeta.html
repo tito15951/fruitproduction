@@ -29,15 +29,12 @@
 </div>
 <script>
     function cargarTarjetas(correo) {
-        console.log('Buscando tarjetas del cliente', '/api/metodopago?correo=', correo)
         $.ajax({
             method: 'get',
             url: '/api/metodopago?correo=' + correo,
         }).then((resp) => {
             inyectable = ``
             divInyectable = document.getElementById('inyectable')
-            console.log(resp)
-            console.log("Hay: ", resp.length, ' tarjetas')
             if (resp.length == 0) {
                 inyectable = `<div class="row">
                         <div class="offset-md-1 col-md-10">

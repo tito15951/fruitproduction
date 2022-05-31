@@ -84,27 +84,27 @@
 
         <div class="card card-internos">
             <div class="row">
-                <div class="col-md-3 mx-auto">
+                <div class="col-md-4 mx-auto">
                     <input type="number" id="cantidad" name="cantidad" class="form-control inputs text-center" style="margin-top:5%;" value="1" placeholder="Cantidad" />
                 </div>
-                <div class="col-md-3 mx-auto">
+                <div class="col-md-4 mx-auto">
                     <button class="btn btn-primary botones">${{producto.valor}}</button>
                 </div>
                 {% if rol == "null" %}
-                <div class="col-md-3 mx-auto">
+                <div class="col-md-4 mx-auto">
                     <a href="{% url 'registro' %}" class="btn btn-primary botones">Registrate para comprar</a>
                 </div>
                 {% else %}
-                <div class="col-md-3 mx-auto">
+                <div class="col-md-4 mx-auto">
                     <form enctype="multipart/form-data" method="post" action="Add">
                         {% csrf_token %}
                         <input style="display:none" id="id" name="id" value="{{producto.id}}"></input>
                         <button type="submit" class="btn btn-primary botones mx-auto" style="margin-top: 5%; border-radius: 10px;">Agregar al carrito</button>
                     </form>
                 </div>
-                <div class="col-md-3 mx-auto">           
+                <!--<div class="col-md-3 mx-auto">           
                     <button type="button" class="btn btn-primary botones">Comprar</button>
-                </div>
+                </div>-->
                 {% endif %}
             </div>
 

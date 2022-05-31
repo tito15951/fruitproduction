@@ -18,6 +18,7 @@ sabores={
     "11":"Vainilla"
 }
 def buscar(request):
+    
     filtro={}
     nombre=request.POST['nombre']
     if nombre!='':
@@ -33,6 +34,7 @@ def buscar(request):
 def buscador(request):
     correo=0
     rol=0
+    carrito=request.session['carrito']
     try:
         filtros=request.session['filtros']
         #print(f"Los filtros para esta busqueda son: {filtros}")
@@ -47,5 +49,5 @@ def buscador(request):
         correo='null'
         rol='null'
     
-    datos={'productos':Productos,'sabores':sabores,'correo':correo,'rol':rol}
+    datos={'productos':Productos,'sabores':sabores,'correo':correo,'rol':rol,'carrito':carrito}
     return render(request,'paginas/buscador.html',datos)

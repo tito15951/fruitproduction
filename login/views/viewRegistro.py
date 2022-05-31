@@ -7,7 +7,9 @@ from ..services import Servicios
 Servi=Servicios()
 
 def registro(request):
-    datos={'correo':'null'}
+    carrito=request.session['carrito']
+    datos={'correo':'null','rol':'null','carrito':carrito}
+
     return render(request,'paginas/registro.html',datos)
 
 def registrarme(request):

@@ -61,12 +61,15 @@
             <div class="modal-footer">
                 {%if carrito.items%}
                 <a type="button" href="{% url 'CLS' %}" class="btn btn-primary botones">Vaciar</a>
+                
+
+                {%endif%} {%if correo == 'null'%}
+                <a type="button" href="{% url 'registro' %}" class="btn btn-primary botones">Registrate para comprar</a> 
+                {%else%}
                 <button type="button" class="btn btn-primary botones" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#modelIdTarjeta">
                     Comprar
                   </button>
-
-                {%endif%} {%if correo == 'null'%}
-                <a type="button" href="{% url 'registro' %}" class="btn btn-primary botones">Registrate para comprar</a> {%endif%}
+                {%endif%}
             </div>
         </div>
     </div>
