@@ -27,5 +27,6 @@ def index(request):
 def cerrarSesion(request):
     #print('Eliminado sesion:',request.session['correo'])
     del request.session['correo']
+    request.session['carrito']={}
     return HttpResponseRedirect('index')
     
